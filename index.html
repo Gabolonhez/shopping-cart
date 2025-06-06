@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="./src/styles/styles.css"> 
+</head>
+<body>
+    <h1>Shopping</h1>
+
+    <div class="products-section">
+        <h2>Available Products</h2>
+        <div id="productList">
+            <!-- Products will be dynamically added here by app.js -->
+        </div>
+    </div>
+
+    <div class="cart-section">
+        <h2>My Cart</h2>
+        <ul id="cartItemsList">
+            <!-- Cart items will be dynamically added here by app.js -->
+        </ul>
+        <p>Total: R$ <span id="cartTotal">0.00</span></p>
+    </div>
+
+    <!--
+        The main application logic for the front-end.
+        This script replaces the role of your original src/index.js for browser interaction.
+    -->
+    <script type="module" src="./src/app.js"></script>
+</body>
+</html>

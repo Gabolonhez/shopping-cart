@@ -1,16 +1,20 @@
 // USE CASES:
 
 // -> Add item
-async function addItem(userCart, item) {
-    userCart.push(item);
+// Adds an item to the cart. If the item already exists (by name), its quantity is incremented.
+async function addItem(userCart, itemToAdd) {
+    const existingItem = userCart.find(item => item.name === itemToAdd.name);
+    if (existingItem) {
+        existingItem.quantity += itemToAdd.quantity; // Assumes itemToAdd.quantity is the amount to add (e.g., 1)
+    } else {
+        userCart.push(itemToAdd);
+    }
 }
 
 // -> Calculate total of the cart
 async function calcTotal(userCart) {
-    console.log("💰Cart total is:");
    const result = userCart.reduce((total, item) => total + item.subtotal(), 0);
-   
-   console.log(`${result.toFixed(2)}`);
+   return result;
 }
 
 // -> Delete item
@@ -23,44 +27,24 @@ async function deleteItem(userCart, name) {
 }
 
 
-// -> Remove item 
-async function removeItem(userCart, item) {
-    const indexFound = userCart.findIndex((p) => p.name === item.name) 
-   
-    // Found the item index
+// -> Remove item (reduce quantity by one, or remove if quantity becomes 0)
+async function removeItem(userCart, itemObjectFromCart) { // Expects the item object that's in the cart
+    const indexFound = userCart.findIndex((cartItem) => cartItem.name === itemObjectFromCart.name);
 
-    if (indexFound == -1) {
-        console.log("Item not found");
+    if (indexFound === -1) {
+        console.log("Item not found in cart to remove.");
         return;
     }
 
-    // If Item > 1, then subtract 1 item
-
+    // If item quantity > 1, then subtract 1 item
     if (userCart[indexFound].quantity > 1) {
         userCart[indexFound].quantity -= 1;
-        return;
-
     }
-
-    // If Item = 1, then delet the item
-    if(userCart[indexFound].quantity = 1) {
+    // If item quantity is 1, then delete the item from the cart
+    else if (userCart[indexFound].quantity === 1) { // Fixed: assignment to comparison
         userCart.splice(indexFound, 1);
-        return;
-    } 
-
-
+    }
 }
-
-
-// -> Remove item by index
-// async function removeItem(userCart, index) {
-
-//     const deleteIndex = index - 1;
-
-//     if (index >= 1 && index <= userCart.length) {
-//         userCart.splice(deleteIndex, 1);
-//     }
-// } 
 
 
 // -> Check cart
@@ -78,4 +62,3 @@ export default {
     calcTotal,
     displayCart
 }
-
