@@ -5,7 +5,7 @@
 Projeto para simular um carrinho de compras.
 
 ## 🎯 Funcionalidades
-- [X] : Adicionar, remover, excluir e exibir itens do carrinho.
+- [X] : Adicionar, remover um, deletar todos e exibir itens no carrinho.
 
 ## 💻 Tecnologias
 - `Node.js`
